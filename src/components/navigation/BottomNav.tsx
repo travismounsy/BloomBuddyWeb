@@ -41,7 +41,7 @@ export default function BottomNav() {
         bg-emerald-900/95 px-3 py-2
         shadow-[0_18px_50px_rgba(20,83,45,0.25)]
         backdrop-blur
-        md:static md:flex md:h-full md:w-64 md:flex-col
+        md:static md:flex md:h-screen md:w-64 md:flex-col
         md:rounded-none md:border-0 md:px-5 md:py-8
       "
     >

@@ -1,4 +1,4 @@
-import PageHeader from "../../../components/ui/PageHeader.tsx";
+import PageHeader from "../../../components/ui/PageHeader";
 
 export default function HomePage() {
   return (
@@ -18,7 +18,9 @@ export default function HomePage() {
         </article>
 
         <article className="rounded-[2rem] border border-emerald-950/10 bg-white p-6 shadow-sm">
-          <p className="font-semibold text-emerald-950">Today’s progress</p>
+          <p className="font-semibold text-emerald-950">
+            Today&apos;s progress
+          </p>
           <p className="mt-2 text-sm text-slate-600">
             Daily habit completion will appear here.
           </p>

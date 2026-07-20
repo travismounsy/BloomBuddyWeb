@@ -7,7 +7,7 @@ export default function AppLayout() {
       <BottomNav />
 
       <div className="min-w-0">
-        <header className="border-b border-emerald-950/10 bg-white/70 backdrop-blur">
+        <header className="border-b border-emerald-950/10 bg-white/75 backdrop-blur">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">
