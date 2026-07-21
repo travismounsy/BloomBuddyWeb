@@ -73,7 +73,13 @@ export default defineConfig([
 ])
 
 ```
-
+Current Tech Stack
+React 19
+TypeScript
+Vite
+React Router
+Tailwind CSS
+Lucide React
 
 ## 🚧 Development Progress
 
