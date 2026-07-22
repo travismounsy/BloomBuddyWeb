@@ -4,28 +4,35 @@ import {
   Home,
   Settings,
   Sprout,
+  User,
 } from "lucide-react";
+
 import { NavLink } from "react-router-dom";
 
 const navItems = [
   {
-    to: "/",
+    to: "/app",
     label: "Home",
     icon: Home,
     end: true,
   },
   {
-    to: "/habits",
+    to: "/app/habits",
     label: "Habits",
     icon: CheckSquare,
   },
   {
-    to: "/progress",
+    to: "/app/progress",
     label: "Progress",
     icon: BarChart3,
   },
   {
-    to: "/settings",
+    to: "/app/profile",
+    label: "Profile",
+    icon: User,
+  },
+  {
+    to: "/app/settings",
     label: "Settings",
     icon: Settings,
   },
