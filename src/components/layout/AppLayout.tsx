@@ -1,13 +1,14 @@
 import { Outlet } from "react-router-dom";
+
 import BottomNav from "../navigation/BottomNav";
 
 export default function AppLayout() {
   return (
-    <div className="min-h-screen md:grid md:grid-cols-[16rem_1fr]">
+    <div className="min-h-screen bg-slate-50">
       <BottomNav />
 
-      <div className="min-w-0">
-        <header className="border-b border-emerald-950/10 bg-white/75 backdrop-blur">
+      <div className="min-w-0 md:ml-64">
+        <header className="sticky top-0 z-30 border-b border-emerald-950/10 bg-white/90 backdrop-blur">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">
