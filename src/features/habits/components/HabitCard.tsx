@@ -18,8 +18,8 @@ type HabitCardProps = {
     habitId: string,
     completion: HabitCompletion | null
   ) => void;
-  onDelete: (habitId: string) => void;
-  deleting?: boolean;
+  onDelete?: (habitId: string) => void;
+deleting?: boolean;
 };
 
 export default function HabitCard({
@@ -152,18 +152,18 @@ export default function HabitCard({
           )}
         </div>
 
+        {onDelete && (
         <button
-          type="button"
-          onClick={() =>
-            onDelete(habit.id)
-          }
-          disabled={deleting}
-          className="rounded-lg border border-red-200 px-3 py-2 text-sm font-medium text-red-700 transition hover:bg-red-50 disabled:opacity-50"
-        >
-          {deleting
-            ? "Deleting..."
-            : "Delete"}
-        </button>
+                type="button"
+                onClick={() => onDelete(habit.id)}
+                disabled={deleting}
+                className="rounded-lg border border-red-200 px-3 py-2 text-sm font-medium text-red-700 transition hover:bg-red-50 disabled:opacity-50"
+                >
+                {deleting
+                ? "Deleting..."
+                : "Delete"}
+            </button>
+        )}
       </div>
     </article>
   );

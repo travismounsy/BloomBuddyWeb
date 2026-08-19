@@ -17,6 +17,7 @@ import HabitsPage from "../features/habits/pages/HabitsPage";
 import ProgressPage from "../features/progress/pages/ProgressPage";
 import ProfilePage from "../features/profile/pages/ProfilePage";
 import SettingsPage from "../features/settings/pages/SettingsPage";
+import CalendarPage from "../features/calendar/pages/CalendarPage";
 
 export const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ export const router = createBrowserRouter([
           {
             path: "settings",
             element: <SettingsPage />,
+          },
+          {
+          path: "calendar",
+          element: <CalendarPage />,
           },
         ],
       },

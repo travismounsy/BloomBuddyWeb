@@ -1,5 +1,6 @@
 import {
   BarChart3,
+  CalendarDays,
   CheckSquare,
   Home,
   Settings,
@@ -20,6 +21,11 @@ const navItems = [
     to: "/app/habits",
     label: "Habits",
     icon: CheckSquare,
+  },
+  {
+    to: "/app/calendar",
+    label: "Calendar",
+    icon: CalendarDays,
   },
   {
     to: "/app/progress",
@@ -48,8 +54,11 @@ export default function BottomNav() {
         bg-emerald-900/95 px-3 py-2
         shadow-[0_18px_50px_rgba(20,83,45,0.25)]
         backdrop-blur
-        md:static md:flex md:h-screen md:w-64 md:flex-col
-        md:rounded-none md:border-0 md:px-5 md:py-8
+
+        md:inset-y-0 md:left-0 md:right-auto
+        md:h-screen md:w-64
+        md:rounded-none md:border-0
+        md:px-5 md:py-8
       "
     >
       <div className="hidden items-center gap-3 px-3 md:mb-10 md:flex">
@@ -58,34 +67,54 @@ export default function BottomNav() {
         </div>
 
         <div>
-          <p className="text-lg font-bold text-white">Bloom Buddy</p>
-          <p className="text-xs text-emerald-200">Grow every day</p>
+          <p className="text-lg font-bold text-white">
+            Bloom Buddy
+          </p>
+
+          <p className="text-xs text-emerald-200">
+            Grow every day
+          </p>
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-1 md:flex md:flex-col md:gap-2">
-        {navItems.map(({ to, label, icon: Icon, end }) => (
-          <NavLink
-            key={to}
-            to={to}
-            end={end}
-            className={({ isActive }: { isActive: boolean }) =>
-              [
-                "flex min-h-14 flex-col items-center justify-center gap-1",
-                "rounded-2xl px-2 py-2 text-xs font-medium",
-                "transition duration-200",
-                "md:min-h-12 md:flex-row md:justify-start md:gap-3",
-                "md:px-4 md:text-sm",
-                isActive
-                  ? "bg-lime-200 text-emerald-950 shadow-sm"
-                  : "text-emerald-100 hover:bg-white/10 hover:text-white",
-              ].join(" ")
-            }
-          >
-            <Icon size={21} aria-hidden="true" />
-            <span>{label}</span>
-          </NavLink>
-        ))}
+      <div className="grid grid-cols-6 gap-1 md:flex md:flex-col md:gap-2">
+        {navItems.map(
+          ({
+            to,
+            label,
+            icon: Icon,
+            end,
+          }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={end}
+              className={({
+                isActive,
+              }: {
+                isActive: boolean;
+              }) =>
+                [
+                  "flex min-h-14 flex-col items-center justify-center gap-1",
+                  "rounded-2xl px-2 py-2 text-xs font-medium",
+                  "transition duration-200",
+                  "md:min-h-12 md:flex-row md:justify-start md:gap-3",
+                  "md:px-4 md:text-sm",
+                  isActive
+                    ? "bg-lime-200 text-emerald-950 shadow-sm"
+                    : "text-emerald-100 hover:bg-white/10 hover:text-white",
+                ].join(" ")
+              }
+            >
+              <Icon
+                size={21}
+                aria-hidden="true"
+              />
+
+              <span>{label}</span>
+            </NavLink>
+          )
+        )}
       </div>
     </nav>
   );
