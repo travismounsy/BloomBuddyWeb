@@ -12,7 +12,7 @@ import LoginPage from "../features/auth/pages/LoginPage";
 import RegisterPage from "../features/auth/pages/RegisterPage";
 
 import LandingPage from "../features/landing/pages/LandingPage";
-import HomePage from "../features/plant/pages/HomePage";
+import HomePage from "../features/home/pages/HomePage";
 import HabitsPage from "../features/habits/pages/HabitsPage";
 import ProgressPage from "../features/progress/pages/ProgressPage";
 import ProfilePage from "../features/profile/pages/ProfilePage";
@@ -69,6 +69,10 @@ export const router = createBrowserRouter([
             element: <HabitsPage />,
           },
           {
+            path: "calendar",
+            element: <CalendarPage />,
+          },
+          {
             path: "progress",
             element: <ProgressPage />,
           },
@@ -79,10 +83,6 @@ export const router = createBrowserRouter([
           {
             path: "settings",
             element: <SettingsPage />,
-          },
-          {
-          path: "calendar",
-          element: <CalendarPage />,
           },
         ],
       },
