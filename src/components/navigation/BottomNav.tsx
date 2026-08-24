@@ -50,20 +50,51 @@ export default function BottomNav() {
       aria-label="Primary navigation"
       className="
         fixed inset-x-4 bottom-4 z-50
-        rounded-3xl border border-white/70
-        bg-emerald-900/95 px-3 py-2
+
+        rounded-3xl
+        border border-white/70
+        bg-emerald-900/95
+        px-3 py-2
+
         shadow-[0_18px_50px_rgba(20,83,45,0.25)]
         backdrop-blur
 
-        md:inset-y-0 md:left-0 md:right-auto
-        md:h-screen md:w-64
-        md:rounded-none md:border-0
-        md:px-5 md:py-8
+        transition-colors duration-200
+
+        dark:border-slate-700/70
+        dark:bg-slate-900/95
+        dark:shadow-[0_18px_50px_rgba(0,0,0,0.35)]
+
+        md:inset-y-0
+        md:left-0
+        md:right-auto
+        md:h-screen
+        md:w-64
+        md:rounded-none
+        md:border-0
+        md:px-5
+        md:py-8
       "
     >
+      {/* Logo */}
       <div className="hidden items-center gap-3 px-3 md:mb-10 md:flex">
-        <div className="grid size-11 place-items-center rounded-2xl bg-lime-200 text-emerald-900">
-          <Sprout size={25} aria-hidden="true" />
+        <div
+          className="
+            grid size-11 place-items-center
+            rounded-2xl
+            bg-lime-200
+            text-emerald-900
+
+            transition-colors duration-200
+
+            dark:bg-emerald-900
+            dark:text-emerald-200
+          "
+        >
+          <Sprout
+            size={25}
+            aria-hidden="true"
+          />
         </div>
 
         <div>
@@ -71,12 +102,18 @@ export default function BottomNav() {
             Bloom Buddy
           </p>
 
-          <p className="text-xs text-emerald-200">
+          <p
+            className="
+              text-xs text-emerald-200
+              dark:text-slate-400
+            "
+          >
             Grow every day
           </p>
         </div>
       </div>
 
+      {/* Navigation */}
       <div className="grid grid-cols-6 gap-1 md:flex md:flex-col md:gap-2">
         {navItems.map(
           ({
@@ -98,11 +135,22 @@ export default function BottomNav() {
                   "flex min-h-14 flex-col items-center justify-center gap-1",
                   "rounded-2xl px-2 py-2 text-xs font-medium",
                   "transition duration-200",
+
                   "md:min-h-12 md:flex-row md:justify-start md:gap-3",
                   "md:px-4 md:text-sm",
+
                   isActive
-                    ? "bg-lime-200 text-emerald-950 shadow-sm"
-                    : "text-emerald-100 hover:bg-white/10 hover:text-white",
+                    ? [
+                        "bg-lime-200 text-emerald-950 shadow-sm",
+                        "dark:bg-emerald-800 dark:text-emerald-100",
+                      ].join(" ")
+                    : [
+                        "text-emerald-100",
+                        "hover:bg-white/10 hover:text-white",
+                        "dark:text-slate-300",
+                        "dark:hover:bg-slate-800",
+                        "dark:hover:text-white",
+                      ].join(" "),
                 ].join(" ")
               }
             >

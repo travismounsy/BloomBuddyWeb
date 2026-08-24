@@ -25,9 +25,11 @@ import type {
 
 function getLocalDateKey(date: Date) {
   const year = date.getFullYear();
+
   const month = String(
     date.getMonth() + 1
   ).padStart(2, "0");
+
   const day = String(
     date.getDate()
   ).padStart(2, "0");
@@ -36,21 +38,31 @@ function getLocalDateKey(date: Date) {
 }
 
 export default function HabitsPage() {
-  const [habits, setHabits] = useState<Habit[]>([]);
-  const [schedules, setSchedules] = useState<HabitSchedule[]>([]);
+  const [habits, setHabits] =
+    useState<Habit[]>([]);
+
+  const [schedules, setSchedules] =
+    useState<HabitSchedule[]>([]);
+
   const [completions, setCompletions] =
     useState<HabitCompletion[]>([]);
 
-  const [selectedDate, setSelectedDate] = useState(
-    getLocalDateKey(new Date())
-  );
+  const [selectedDate, setSelectedDate] =
+    useState(
+      getLocalDateKey(new Date())
+    );
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] =
+    useState(true);
+
   const [deletingId, setDeletingId] =
     useState<string | null>(null);
 
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] =
+    useState("");
+
+  const [successMessage, setSuccessMessage] =
+    useState("");
 
   const selectedDateObject = new Date(
     `${selectedDate}T00:00:00`
@@ -93,21 +105,24 @@ export default function HabitsPage() {
     habitId: string,
     completion: HabitCompletion | null
   ) {
-    setCompletions((currentCompletions) => {
-      const remaining =
-        currentCompletions.filter(
-          (item) => item.habit_id !== habitId
-        );
+    setCompletions(
+      (currentCompletions) => {
+        const remaining =
+          currentCompletions.filter(
+            (item) =>
+              item.habit_id !== habitId
+          );
 
-      if (!completion) {
-        return remaining;
+        if (!completion) {
+          return remaining;
+        }
+
+        return [
+          ...remaining,
+          completion,
+        ];
       }
-
-      return [
-        ...remaining,
-        completion,
-      ];
-    });
+    );
   }
 
   async function handleDeleteHabit(
@@ -128,27 +143,33 @@ export default function HabitsPage() {
     try {
       await deleteHabit(habitId);
 
-      setHabits((currentHabits) =>
-        currentHabits.filter(
-          (habit) => habit.id !== habitId
-        )
+      setHabits(
+        (currentHabits) =>
+          currentHabits.filter(
+            (habit) =>
+              habit.id !== habitId
+          )
       );
 
-      setSchedules((currentSchedules) =>
-        currentSchedules.filter(
-          (schedule) =>
-            schedule.habit_id !== habitId
-        )
+      setSchedules(
+        (currentSchedules) =>
+          currentSchedules.filter(
+            (schedule) =>
+              schedule.habit_id !== habitId
+          )
       );
 
-      setCompletions((currentCompletions) =>
-        currentCompletions.filter(
-          (completion) =>
-            completion.habit_id !== habitId
-        )
+      setCompletions(
+        (currentCompletions) =>
+          currentCompletions.filter(
+            (completion) =>
+              completion.habit_id !== habitId
+          )
       );
 
-      setSuccessMessage("Habit deleted.");
+      setSuccessMessage(
+        "Habit deleted."
+      );
     } catch (error) {
       setErrorMessage(
         error instanceof Error
@@ -170,7 +191,7 @@ export default function HabitsPage() {
   if (loading) {
     return (
       <section>
-        <p className="text-slate-600">
+        <p className="text-slate-600 dark:text-slate-400">
           Loading habits...
         </p>
       </section>
@@ -180,15 +201,36 @@ export default function HabitsPage() {
   return (
     <section>
       <div>
-        <p className="text-sm font-semibold uppercase tracking-wider text-green-700">
+        <p
+          className="
+            text-sm font-semibold
+            uppercase tracking-wider
+            text-green-700
+
+            dark:text-emerald-300
+          "
+        >
           Habits
         </p>
 
-        <h1 className="mt-2 text-3xl font-bold text-slate-900">
+        <h1
+          className="
+            mt-2 text-3xl font-bold
+            text-slate-900
+
+            dark:text-slate-100
+          "
+        >
           Build Your Habits
         </h1>
 
-        <p className="mt-2 text-slate-600">
+        <p
+          className="
+            mt-2 text-slate-600
+
+            dark:text-slate-400
+          "
+        >
           Create and manage the routines that help your
           Bloom Buddy grow.
         </p>
@@ -197,7 +239,14 @@ export default function HabitsPage() {
       {errorMessage && (
         <p
           role="alert"
-          className="mt-6 rounded-lg bg-red-50 p-3 text-sm text-red-700"
+          className="
+            mt-6 rounded-lg
+            bg-red-50 p-3
+            text-sm text-red-700
+
+            dark:bg-red-950/40
+            dark:text-red-300
+          "
         >
           {errorMessage}
         </p>
@@ -206,7 +255,14 @@ export default function HabitsPage() {
       {successMessage && (
         <p
           role="status"
-          className="mt-6 rounded-lg bg-green-50 p-3 text-sm text-green-700"
+          className="
+            mt-6 rounded-lg
+            bg-green-50 p-3
+            text-sm text-green-700
+
+            dark:bg-emerald-950/40
+            dark:text-emerald-300
+          "
         >
           {successMessage}
         </p>
@@ -214,16 +270,23 @@ export default function HabitsPage() {
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[22rem_1fr]">
         <HabitForm
-          onHabitCreated={(habit, newSchedules) => {
-            setHabits((currentHabits) => [
-              habit,
-              ...currentHabits,
-            ]);
+          onHabitCreated={(
+            habit,
+            newSchedules
+          ) => {
+            setHabits(
+              (currentHabits) => [
+                habit,
+                ...currentHabits,
+              ]
+            );
 
-            setSchedules((currentSchedules) => [
-              ...currentSchedules,
-              ...newSchedules,
-            ]);
+            setSchedules(
+              (currentSchedules) => [
+                ...currentSchedules,
+                ...newSchedules,
+              ]
+            );
 
             setSuccessMessage(
               "Habit created successfully."
@@ -237,7 +300,12 @@ export default function HabitsPage() {
             <div>
               <label
                 htmlFor="selectedDate"
-                className="block text-sm font-medium text-slate-900"
+                className="
+                  block text-sm font-medium
+                  text-slate-900
+
+                  dark:text-slate-200
+                "
               >
                 View habits for
               </label>
@@ -251,7 +319,24 @@ export default function HabitsPage() {
                     event.target.value
                   )
                 }
-                className="mt-2 rounded-lg border border-slate-300 px-4 py-2"
+                className="
+                  mt-2 rounded-lg
+                  border border-slate-300
+                  bg-white
+                  px-4 py-2
+                  text-slate-900
+                  transition-colors duration-200
+
+                  focus:border-emerald-500
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-emerald-500/20
+
+                  dark:border-slate-700
+                  dark:bg-slate-800
+                  dark:text-slate-100
+                  dark:focus:border-emerald-400
+                "
               />
             </div>
 
@@ -259,10 +344,24 @@ export default function HabitsPage() {
               type="button"
               onClick={() =>
                 setSelectedDate(
-                  getLocalDateKey(new Date())
+                  getLocalDateKey(
+                    new Date()
+                  )
                 )
               }
-              className="rounded-lg border border-green-600 px-4 py-2 font-medium text-green-700 transition hover:bg-green-50"
+              className="
+                rounded-lg
+                border border-green-600
+                px-4 py-2
+                font-medium text-green-700
+                transition
+
+                hover:bg-green-50
+
+                dark:border-emerald-500
+                dark:text-emerald-300
+                dark:hover:bg-emerald-950/40
+              "
             >
               Today
             </button>
@@ -270,11 +369,24 @@ export default function HabitsPage() {
 
           {/* Habit count */}
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-slate-900">
+            <h2
+              className="
+                text-xl font-semibold
+                text-slate-900
+
+                dark:text-slate-100
+              "
+            >
               Scheduled Habits
             </h2>
 
-            <span className="text-sm text-slate-500">
+            <span
+              className="
+                text-sm text-slate-500
+
+                dark:text-slate-400
+              "
+            >
               {habitsDueForSelectedDate.length}{" "}
               {habitsDueForSelectedDate.length === 1
                 ? "habit"
@@ -284,12 +396,36 @@ export default function HabitsPage() {
 
           {/* Habit list */}
           {habitsDueForSelectedDate.length === 0 ? (
-            <div className="mt-5 rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center">
-              <p className="font-medium text-slate-700">
+            <div
+              className="
+                mt-5 rounded-2xl
+                border border-dashed
+                border-slate-300
+                bg-white p-10 text-center
+
+                dark:border-slate-700
+                dark:bg-slate-900
+              "
+            >
+              <p
+                className="
+                  font-medium
+                  text-slate-700
+
+                  dark:text-slate-200
+                "
+              >
                 No habits scheduled for this date.
               </p>
 
-              <p className="mt-2 text-sm text-slate-500">
+              <p
+                className="
+                  mt-2 text-sm
+                  text-slate-500
+
+                  dark:text-slate-400
+                "
+              >
                 Choose another date or create a new habit.
               </p>
             </div>
@@ -300,21 +436,27 @@ export default function HabitsPage() {
                   const completion =
                     completions.find(
                       (item) =>
-                        item.habit_id === habit.id
+                        item.habit_id ===
+                        habit.id
                     ) ?? null;
 
                   return (
                     <HabitCard
                       key={habit.id}
                       habit={habit}
-                      completion={completion}
+                      completion={
+                        completion
+                      }
                       date={selectedDate}
                       onCompletionChange={
                         handleCompletionChange
                       }
-                      onDelete={handleDeleteHabit}
+                      onDelete={
+                        handleDeleteHabit
+                      }
                       deleting={
-                        deletingId === habit.id
+                        deletingId ===
+                        habit.id
                       }
                     />
                   );

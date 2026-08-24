@@ -30,19 +30,42 @@ export default function SchedulePicker({
   function toggleDay(day: number) {
     if (selectedDays.includes(day)) {
       onSelectedDaysChange(
-        selectedDays.filter((selectedDay) => selectedDay !== day)
+        selectedDays.filter(
+          (selectedDay) => selectedDay !== day
+        )
       );
     } else {
-      onSelectedDaysChange([...selectedDays, day]);
+      onSelectedDaysChange([
+        ...selectedDays,
+        day,
+      ]);
     }
   }
+
+  const inputClassName = `
+    mt-2 w-full rounded-lg
+    border border-slate-300
+    bg-white px-4 py-3
+    text-slate-900
+    transition-colors duration-200
+
+    focus:border-emerald-500
+    focus:outline-none
+    focus:ring-2
+    focus:ring-emerald-500/20
+
+    dark:border-slate-700
+    dark:bg-slate-800
+    dark:text-slate-100
+    dark:focus:border-emerald-400
+  `;
 
   return (
     <div className="space-y-4">
       <div>
         <label
           htmlFor="scheduleType"
-          className="block font-medium text-slate-900"
+          className="block font-medium text-slate-900 dark:text-slate-200"
         >
           Repeat
         </label>
@@ -55,34 +78,66 @@ export default function SchedulePicker({
               event.target.value as HabitScheduleType
             )
           }
-          className="mt-2 w-full rounded-lg border border-slate-300 px-4 py-3"
+          className={inputClassName}
         >
-          <option value="daily">Daily</option>
-          <option value="weekly">Weekly</option>
-          <option value="monthly">Monthly</option>
+          <option value="daily">
+            Daily
+          </option>
+
+          <option value="weekly">
+            Weekly
+          </option>
+
+          <option value="monthly">
+            Monthly
+          </option>
         </select>
       </div>
 
       {scheduleType === "weekly" && (
         <div>
-          <p className="font-medium text-slate-900">
+          <p className="font-medium text-slate-900 dark:text-slate-200">
             Repeat on
           </p>
 
           <div className="mt-3 flex flex-wrap gap-2">
             {days.map((day) => {
-              const selected = selectedDays.includes(day.value);
+              const selected =
+                selectedDays.includes(
+                  day.value
+                );
 
               return (
                 <button
                   key={day.value}
                   type="button"
-                  onClick={() => toggleDay(day.value)}
+                  aria-pressed={selected}
+                  onClick={() =>
+                    toggleDay(
+                      day.value
+                    )
+                  }
                   className={[
-                    "rounded-full px-3 py-2 text-sm font-medium transition",
+                    "rounded-full px-3 py-2",
+                    "text-sm font-medium",
+                    "transition duration-200",
+
                     selected
-                      ? "bg-green-600 text-white"
-                      : "bg-slate-100 text-slate-700 hover:bg-slate-200",
+                      ? [
+                          "bg-green-600 text-white",
+                          "dark:bg-emerald-500",
+                          "dark:text-slate-950",
+                        ].join(" ")
+                      : [
+                          "bg-slate-100",
+                          "text-slate-700",
+                          "hover:bg-slate-200",
+
+                          "dark:bg-slate-800",
+                          "dark:text-slate-300",
+                          "dark:hover:bg-slate-700",
+                          "dark:hover:text-white",
+                        ].join(" "),
                   ].join(" ")}
                 >
                   {day.label}
@@ -97,7 +152,7 @@ export default function SchedulePicker({
         <div>
           <label
             htmlFor="dayOfMonth"
-            className="block font-medium text-slate-900"
+            className="block font-medium text-slate-900 dark:text-slate-200"
           >
             Day of month
           </label>
@@ -111,11 +166,13 @@ export default function SchedulePicker({
             onChange={(event) =>
               onDayOfMonthChange(
                 event.target.value
-                  ? Number(event.target.value)
+                  ? Number(
+                      event.target.value
+                    )
                   : null
               )
             }
-            className="mt-2 w-full rounded-lg border border-slate-300 px-4 py-3"
+            className={inputClassName}
           />
         </div>
       )}

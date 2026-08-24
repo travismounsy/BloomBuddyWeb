@@ -88,7 +88,13 @@ export default function CalendarGrid({
         {weekdayLabels.map((label) => (
           <div
             key={label}
-            className="py-2 text-center text-sm font-semibold text-slate-500"
+            className="
+              py-2 text-center
+              text-sm font-semibold
+              text-slate-500
+
+              dark:text-slate-400
+            "
           >
             {label}
           </div>
@@ -99,7 +105,12 @@ export default function CalendarGrid({
             return (
               <div
                 key={`empty-${index}`}
-                className="min-h-28 rounded-xl bg-slate-50"
+                className="
+                  min-h-28 rounded-xl
+                  bg-slate-50
+
+                  dark:bg-slate-950/40
+                "
               />
             );
           }
@@ -153,27 +164,55 @@ export default function CalendarGrid({
                 onDateSelect(date)
               }
               className={[
-                "min-h-28 rounded-xl border p-3 text-left transition",
-                "hover:border-green-400 hover:bg-green-50/40",
+                "min-h-28 rounded-xl border p-3 text-left",
+                "transition-colors duration-200",
+
+                "hover:border-green-400",
+                "hover:bg-green-50/40",
+
+                "dark:hover:border-emerald-500",
+                "dark:hover:bg-emerald-950/20",
+
                 isSelected
-                  ? "border-green-600 bg-green-50"
-                  : "border-slate-200 bg-white",
+                  ? [
+                      "border-green-600",
+                      "bg-green-50",
+
+                      "dark:border-emerald-500",
+                      "dark:bg-emerald-950/30",
+                    ].join(" ")
+                  : [
+                      "border-slate-200",
+                      "bg-white",
+
+                      "dark:border-slate-700",
+                      "dark:bg-slate-800/60",
+                    ].join(" "),
               ].join(" ")}
             >
               <div className="flex items-center justify-between">
                 <span
                   className={[
-                    "grid size-7 place-items-center rounded-full text-sm font-medium",
+                    "grid size-7 place-items-center rounded-full",
+                    "text-sm font-medium",
+
                     isToday
-                      ? "bg-green-600 text-white"
-                      : "text-slate-900",
+                      ? [
+                          "bg-green-600 text-white",
+                          "dark:bg-emerald-500",
+                          "dark:text-slate-950",
+                        ].join(" ")
+                      : [
+                          "text-slate-900",
+                          "dark:text-slate-100",
+                        ].join(" "),
                   ].join(" ")}
                 >
                   {date.getDate()}
                 </span>
 
                 {totalCount > 0 && (
-                  <span className="text-xs text-slate-400">
+                  <span className="text-xs text-slate-400 dark:text-slate-500">
                     {totalCount}
                   </span>
                 )}
@@ -186,7 +225,16 @@ export default function CalendarGrid({
                     .map((habit) => (
                       <div
                         key={habit.id}
-                        className="flex items-center gap-2 rounded-md bg-green-50 px-2 py-1 text-xs text-green-800"
+                        className="
+                          flex items-center gap-2
+                          rounded-md
+                          bg-green-50
+                          px-2 py-1
+                          text-xs text-green-800
+
+                          dark:bg-emerald-950/40
+                          dark:text-emerald-200
+                        "
                       >
                         <span
                           className="size-2 shrink-0 rounded-full"
@@ -204,7 +252,7 @@ export default function CalendarGrid({
                     ))}
 
                   {habitsForDate.length > 3 && (
-                    <p className="px-1 text-xs text-slate-500">
+                    <p className="px-1 text-xs text-slate-500 dark:text-slate-400">
                       +{habitsForDate.length - 3} more
                     </p>
                   )}
@@ -217,8 +265,8 @@ export default function CalendarGrid({
                     <span
                       className={
                         allCompleted
-                          ? "font-medium text-green-700"
-                          : "text-slate-500"
+                          ? "font-medium text-green-700 dark:text-emerald-300"
+                          : "text-slate-500 dark:text-slate-400"
                       }
                     >
                       {completedCount}/{totalCount} completed
@@ -226,7 +274,7 @@ export default function CalendarGrid({
 
                     {allCompleted && (
                       <span
-                        className="font-semibold text-green-600"
+                        className="font-semibold text-green-600 dark:text-emerald-300"
                         aria-label="All habits completed"
                       >
                         ✓
@@ -234,9 +282,15 @@ export default function CalendarGrid({
                     )}
                   </div>
 
-                  <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-slate-100">
+                  <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-700">
                     <div
-                      className="h-full rounded-full bg-green-500 transition-all"
+                      className="
+                        h-full rounded-full
+                        bg-green-500
+                        transition-all
+
+                        dark:bg-emerald-400
+                      "
                       style={{
                         width: `${completionPercentage}%`,
                       }}
