@@ -66,34 +66,52 @@ export default function BloomPlant({
   const firstRender = useRef(true);
 
   useEffect(() => {
-  if (firstRender.current) {
-    firstRender.current = false;
-    setDisplayedStage(stage);
-    return;
-  }
+    if (firstRender.current) {
+      firstRender.current = false;
+      setDisplayedStage(stage);
+      return;
+    }
 
-  setTransitioning(true);
+    setTransitioning(true);
 
-  const swapTimer = window.setTimeout(() => {
-    setDisplayedStage(stage);
-  }, 200);
+    const swapTimer = window.setTimeout(() => {
+      setDisplayedStage(stage);
+    }, 200);
 
-  const finishTimer = window.setTimeout(() => {
-    setTransitioning(false);
-  }, 450);
+    const finishTimer = window.setTimeout(() => {
+      setTransitioning(false);
+    }, 450);
 
-  return () => {
-    window.clearTimeout(swapTimer);
-    window.clearTimeout(finishTimer);
-  };
-}, [stage]);
+    return () => {
+      window.clearTimeout(swapTimer);
+      window.clearTimeout(finishTimer);
+    };
+  }, [stage]);
 
   return (
-    <div className="relative overflow-hidden rounded-[2rem] border border-emerald-950/10 bg-white p-8 text-center shadow-sm">
+    <div
+      className="
+        relative overflow-hidden
+        rounded-[2rem]
+        border border-emerald-950/10
+        bg-white p-8 text-center shadow-sm
+        transition-colors duration-200
+
+        dark:border-white/10
+        dark:bg-slate-900
+      "
+    >
       {/* Celebration glow */}
       {displayedStage === "full" && (
         <div
-          className="pointer-events-none absolute inset-x-16 top-8 h-56 rounded-full bg-lime-200/30 blur-3xl"
+          className="
+            pointer-events-none
+            absolute inset-x-16 top-8
+            h-56 rounded-full
+            bg-lime-200/30 blur-3xl
+
+            dark:bg-emerald-500/10
+          "
           aria-hidden="true"
         />
       )}
@@ -101,29 +119,52 @@ export default function BloomPlant({
       {/* Plant */}
       <div className="relative flex min-h-72 items-end justify-center">
         <img
-        src={plantImages[displayedStage]}
-        alt={`Bloom Buddy growth stage: ${displayedStage}`}
-        className={[
+          src={plantImages[displayedStage]}
+          alt={`Bloom Buddy growth stage: ${displayedStage}`}
+          className={[
             "max-h-64 w-auto object-contain",
             "transition-all duration-300 ease-out",
             transitioning
-            ? "translate-y-2 scale-95 opacity-0"
-            : "translate-y-0 scale-100 opacity-100",
-        ].join(" ")}
+              ? "translate-y-2 scale-95 opacity-0"
+              : "translate-y-0 scale-100 opacity-100",
+          ].join(" ")}
         />
       </div>
 
       {/* Message */}
-      <p className="relative mt-5 text-lg font-semibold text-emerald-900">
+      <p
+        className="
+          relative mt-5
+          text-lg font-semibold
+          text-emerald-900
+
+          dark:text-emerald-200
+        "
+      >
         {plantMessages[displayedStage]}
       </p>
 
-      <p className="relative mt-2 text-sm text-slate-600">
+      <p
+        className="
+          relative mt-2
+          text-sm text-slate-600
+
+          dark:text-slate-400
+        "
+      >
         {completionRate}% complete today
       </p>
 
       {/* Progress bar */}
-      <div className="relative mx-auto mt-5 h-2 max-w-sm overflow-hidden rounded-full bg-slate-100">
+      <div
+        className="
+          relative mx-auto mt-5
+          h-2 max-w-sm overflow-hidden rounded-full
+          bg-slate-100
+
+          dark:bg-slate-800
+        "
+      >
         <div
           className="h-full rounded-full bg-emerald-500 transition-all duration-500 ease-out"
           style={{
@@ -151,10 +192,9 @@ export default function BloomPlant({
                 className={[
                   "size-2 rounded-full transition-all duration-300",
                   reached
-                    ? "bg-emerald-600"
-                    : "bg-slate-200",
-                  growthStage ===
-                  displayedStage
+                    ? "bg-emerald-600 dark:bg-emerald-400"
+                    : "bg-slate-200 dark:bg-slate-700",
+                  growthStage === displayedStage
                     ? "scale-150"
                     : "scale-100",
                 ].join(" ")}

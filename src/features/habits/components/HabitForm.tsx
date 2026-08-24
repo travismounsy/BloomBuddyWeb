@@ -77,25 +77,28 @@ export default function HabitForm({
         endDate: endDate || null,
       });
 
-      const newSchedules = await createHabitSchedules(
-            newHabit.id,
-            scheduleType,
-            selectedDays,
-            dayOfMonth
+      const newSchedules =
+        await createHabitSchedules(
+          newHabit.id,
+          scheduleType,
+          selectedDays,
+          dayOfMonth
         );
 
-        onHabitCreated(
-            newHabit,
-            newSchedules
-        );
+      onHabitCreated(
+        newHabit,
+        newSchedules
+      );
 
       setTitle("");
       setDescription("");
       setCategory("");
       setColor("#16a34a");
+
       setStartDate(
         new Date().toISOString().split("T")[0]
       );
+
       setEndDate("");
       setScheduleType("daily");
       setSelectedDays([]);
@@ -103,7 +106,9 @@ export default function HabitForm({
     } catch (error) {
       if (newHabit) {
         try {
-          await deleteHabit(newHabit.id);
+          await deleteHabit(
+            newHabit.id
+          );
         } catch (cleanupError) {
           console.error(
             "Failed to clean up habit after schedule creation failed:",
@@ -122,19 +127,55 @@ export default function HabitForm({
     }
   }
 
+  const inputClassName = `
+    mt-2 w-full rounded-lg
+    border border-slate-300
+    bg-white px-4 py-3
+    text-slate-900
+    transition-colors duration-200
+
+    placeholder:text-slate-400
+
+    focus:border-emerald-500
+    focus:outline-none
+    focus:ring-2
+    focus:ring-emerald-500/20
+
+    dark:border-slate-700
+    dark:bg-slate-800
+    dark:text-slate-100
+    dark:placeholder:text-slate-500
+    dark:focus:border-emerald-400
+  `;
+
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl border border-slate-200 bg-white p-6"
+      className="
+        rounded-2xl
+        border border-slate-200
+        bg-white p-6
+        transition-colors duration-200
+
+        dark:border-slate-700
+        dark:bg-slate-900
+      "
     >
-      <h2 className="text-xl font-semibold text-slate-900">
+      <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
         Create Habit
       </h2>
 
       {errorMessage && (
         <p
           role="alert"
-          className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-700"
+          className="
+            mt-4 rounded-lg
+            bg-red-50 p-3
+            text-sm text-red-700
+
+            dark:bg-red-950/40
+            dark:text-red-300
+          "
         >
           {errorMessage}
         </p>
@@ -143,7 +184,7 @@ export default function HabitForm({
       <div className="mt-5">
         <label
           htmlFor="habitTitle"
-          className="block font-medium text-slate-900"
+          className="block font-medium text-slate-900 dark:text-slate-200"
         >
           Habit name
         </label>
@@ -157,14 +198,14 @@ export default function HabitForm({
             setTitle(event.target.value)
           }
           placeholder="Drink water"
-          className="mt-2 w-full rounded-lg border border-slate-300 px-4 py-3"
+          className={inputClassName}
         />
       </div>
 
       <div className="mt-5">
         <label
           htmlFor="habitDescription"
-          className="block font-medium text-slate-900"
+          className="block font-medium text-slate-900 dark:text-slate-200"
         >
           Description
         </label>
@@ -177,14 +218,14 @@ export default function HabitForm({
             setDescription(event.target.value)
           }
           placeholder="Optional description"
-          className="mt-2 w-full rounded-lg border border-slate-300 px-4 py-3"
+          className={inputClassName}
         />
       </div>
 
       <div className="mt-5">
         <label
           htmlFor="habitCategory"
-          className="block font-medium text-slate-900"
+          className="block font-medium text-slate-900 dark:text-slate-200"
         >
           Category
         </label>
@@ -197,7 +238,7 @@ export default function HabitForm({
             setCategory(event.target.value)
           }
           placeholder="Health"
-          className="mt-2 w-full rounded-lg border border-slate-300 px-4 py-3"
+          className={inputClassName}
         />
       </div>
 
@@ -205,7 +246,7 @@ export default function HabitForm({
         <div>
           <label
             htmlFor="habitStartDate"
-            className="block font-medium text-slate-900"
+            className="block font-medium text-slate-900 dark:text-slate-200"
           >
             Start date
           </label>
@@ -216,16 +257,18 @@ export default function HabitForm({
             required
             value={startDate}
             onChange={(event) =>
-              setStartDate(event.target.value)
+              setStartDate(
+                event.target.value
+              )
             }
-            className="mt-2 w-full rounded-lg border border-slate-300 px-4 py-3"
+            className={inputClassName}
           />
         </div>
 
         <div>
           <label
             htmlFor="habitEndDate"
-            className="block font-medium text-slate-900"
+            className="block font-medium text-slate-900 dark:text-slate-200"
           >
             End date
           </label>
@@ -236,9 +279,11 @@ export default function HabitForm({
             min={startDate}
             value={endDate}
             onChange={(event) =>
-              setEndDate(event.target.value)
+              setEndDate(
+                event.target.value
+              )
             }
-            className="mt-2 w-full rounded-lg border border-slate-300 px-4 py-3"
+            className={inputClassName}
           />
         </div>
       </div>
@@ -246,7 +291,7 @@ export default function HabitForm({
       <div className="mt-5">
         <label
           htmlFor="habitColor"
-          className="block font-medium text-slate-900"
+          className="block font-medium text-slate-900 dark:text-slate-200"
         >
           Color
         </label>
@@ -258,7 +303,15 @@ export default function HabitForm({
           onChange={(event) =>
             setColor(event.target.value)
           }
-          className="mt-2 h-12 w-full cursor-pointer rounded-lg border border-slate-300 p-1"
+          className="
+            mt-2 h-12 w-full
+            cursor-pointer rounded-lg
+            border border-slate-300
+            bg-white p-1
+
+            dark:border-slate-700
+            dark:bg-slate-800
+          "
         />
       </div>
 
@@ -267,18 +320,40 @@ export default function HabitForm({
           scheduleType={scheduleType}
           selectedDays={selectedDays}
           dayOfMonth={dayOfMonth}
-          onScheduleTypeChange={setScheduleType}
-          onSelectedDaysChange={setSelectedDays}
-          onDayOfMonthChange={setDayOfMonth}
+          onScheduleTypeChange={
+            setScheduleType
+          }
+          onSelectedDaysChange={
+            setSelectedDays
+          }
+          onDayOfMonthChange={
+            setDayOfMonth
+          }
         />
       </div>
 
       <button
         type="submit"
         disabled={creating}
-        className="mt-6 w-full rounded-lg bg-green-600 px-5 py-3 font-semibold text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-60"
+        className="
+          mt-6 w-full
+          rounded-lg
+          bg-green-600 px-5 py-3
+          font-semibold text-white
+          transition
+
+          hover:bg-green-700
+
+          dark:bg-emerald-600
+          dark:hover:bg-emerald-500
+
+          disabled:cursor-not-allowed
+          disabled:opacity-60
+        "
       >
-        {creating ? "Creating..." : "Create Habit"}
+        {creating
+          ? "Creating..."
+          : "Create Habit"}
       </button>
     </form>
   );

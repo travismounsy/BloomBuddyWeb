@@ -19,7 +19,7 @@ type HabitCardProps = {
     completion: HabitCompletion | null
   ) => void;
   onDelete?: (habitId: string) => void;
-deleting?: boolean;
+  deleting?: boolean;
 };
 
 export default function HabitCard({
@@ -43,14 +43,21 @@ export default function HabitCard({
 
     try {
       if (isComplete) {
-        await unmarkHabitComplete(habit.id, date);
-
-        onCompletionChange(habit.id, null);
-      } else {
-        const newCompletion = await markHabitComplete(
+        await unmarkHabitComplete(
           habit.id,
           date
         );
+
+        onCompletionChange(
+          habit.id,
+          null
+        );
+      } else {
+        const newCompletion =
+          await markHabitComplete(
+            habit.id,
+            date
+          );
 
         onCompletionChange(
           habit.id,
@@ -69,8 +76,19 @@ export default function HabitCard({
   }
 
   return (
-    <article className="rounded-2xl border border-slate-200 bg-white p-5">
+    <article
+      className="
+        rounded-2xl
+        border border-slate-200
+        bg-white p-5
+        transition-colors duration-200
+
+        dark:border-slate-700
+        dark:bg-slate-800/70
+      "
+    >
       <div className="flex items-start gap-4">
+        {/* Completion button */}
         <button
           type="button"
           onClick={handleCompletionToggle}
@@ -82,10 +100,28 @@ export default function HabitCard({
               : `Mark ${habit.title} complete`
           }
           className={[
-            "mt-1 grid size-7 shrink-0 place-items-center rounded-full border-2 transition",
+            "mt-1 grid size-7 shrink-0 place-items-center",
+            "rounded-full border-2 transition",
+
             isComplete
-              ? "border-green-600 bg-green-600 text-white"
-              : "border-slate-300 bg-white hover:border-green-500",
+              ? [
+                  "border-green-600",
+                  "bg-green-600",
+                  "text-white",
+
+                  "dark:border-emerald-500",
+                  "dark:bg-emerald-500",
+                ].join(" ")
+              : [
+                  "border-slate-300",
+                  "bg-white",
+                  "hover:border-green-500",
+
+                  "dark:border-slate-600",
+                  "dark:bg-slate-900",
+                  "dark:hover:border-emerald-400",
+                ].join(" "),
+
             updatingCompletion
               ? "cursor-not-allowed opacity-60"
               : "",
@@ -98,6 +134,7 @@ export default function HabitCard({
           )}
         </button>
 
+        {/* Habit color */}
         <div
           className="mt-2 size-3 shrink-0 rounded-full"
           style={{
@@ -107,62 +144,131 @@ export default function HabitCard({
         />
 
         <div className="min-w-0 flex-1">
+          {/* Habit title */}
           <h3
             className={[
-              "text-lg font-semibold",
+              "text-lg font-semibold transition-colors",
+
               isComplete
-                ? "text-slate-500 line-through"
-                : "text-slate-900",
+                ? [
+                    "text-slate-500 line-through",
+                    "dark:text-slate-500",
+                  ].join(" ")
+                : [
+                    "text-slate-900",
+                    "dark:text-slate-100",
+                  ].join(" "),
             ].join(" ")}
           >
             {habit.title}
           </h3>
 
+          {/* Description */}
           {habit.description && (
-            <p className="mt-1 text-sm text-slate-600">
+            <p
+              className="
+                mt-1 text-sm text-slate-600
+                dark:text-slate-400
+              "
+            >
               {habit.description}
             </p>
           )}
 
-          <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-500">
+          {/* Metadata */}
+          <div
+            className="
+              mt-3 flex flex-wrap gap-2
+              text-xs text-slate-500
+
+              dark:text-slate-400
+            "
+          >
             {habit.category && (
-              <span className="rounded-full bg-slate-100 px-3 py-1">
+              <span
+                className="
+                  rounded-full
+                  bg-slate-100 px-3 py-1
+
+                  dark:bg-slate-700
+                  dark:text-slate-300
+                "
+              >
                 {habit.category}
               </span>
             )}
 
-            <span className="rounded-full bg-slate-100 px-3 py-1">
+            <span
+              className="
+                rounded-full
+                bg-slate-100 px-3 py-1
+
+                dark:bg-slate-700
+                dark:text-slate-300
+              "
+            >
               Starts {habit.start_date}
             </span>
 
             {isComplete && (
-              <span className="rounded-full bg-green-100 px-3 py-1 text-green-700">
+              <span
+                className="
+                  rounded-full
+                  bg-green-100 px-3 py-1
+                  text-green-700
+
+                  dark:bg-emerald-950/50
+                  dark:text-emerald-300
+                "
+              >
                 Completed
               </span>
             )}
           </div>
 
+          {/* Error */}
           {errorMessage && (
             <p
               role="alert"
-              className="mt-3 text-sm text-red-700"
+              className="
+                mt-3 text-sm text-red-700
+                dark:text-red-300
+              "
             >
               {errorMessage}
             </p>
           )}
         </div>
 
+        {/* Delete */}
         {onDelete && (
-        <button
-                type="button"
-                onClick={() => onDelete(habit.id)}
-                disabled={deleting}
-                className="rounded-lg border border-red-200 px-3 py-2 text-sm font-medium text-red-700 transition hover:bg-red-50 disabled:opacity-50"
-                >
-                {deleting
-                ? "Deleting..."
-                : "Delete"}
-            </button>
+          <button
+            type="button"
+            onClick={() =>
+              onDelete(habit.id)
+            }
+            disabled={deleting}
+            className="
+              rounded-lg
+              border border-red-200
+              px-3 py-2
+              text-sm font-medium
+              text-red-700
+              transition
+
+              hover:bg-red-50
+
+              dark:border-red-900/70
+              dark:text-red-300
+              dark:hover:bg-red-950/40
+
+              disabled:opacity-50
+            "
+          >
+            {deleting
+              ? "Deleting..."
+              : "Delete"}
+          </button>
         )}
       </div>
     </article>

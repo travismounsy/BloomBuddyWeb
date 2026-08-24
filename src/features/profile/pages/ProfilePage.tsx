@@ -6,6 +6,7 @@ import {
   updateDisplayName,
   updateGardenVisibility,
 } from "../services/profileService";
+
 import type { Profile } from "../services/profileService";
 
 import {
@@ -15,33 +16,67 @@ import {
 } from "../services/avatarService";
 
 export default function ProfilePage() {
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [displayName, setDisplayName] = useState("");
+  const [profile, setProfile] =
+    useState<Profile | null>(null);
 
-  const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
+  const [displayName, setDisplayName] =
+    useState("");
 
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const [loading, setLoading] =
+    useState(true);
 
-  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
-  const [uploadingAvatar, setUploadingAvatar] = useState(false);
-  const [removingAvatar, setRemovingAvatar] = useState(false);
+  const [saving, setSaving] =
+    useState(false);
 
-  const [gardenVisibility, setGardenVisibility] =
-    useState<"private" | "connections">("private");
+  const [errorMessage, setErrorMessage] =
+    useState("");
+
+  const [successMessage, setSuccessMessage] =
+    useState("");
+
+  const [avatarUrl, setAvatarUrl] =
+    useState<string | null>(null);
+
+  const [
+    uploadingAvatar,
+    setUploadingAvatar,
+  ] = useState(false);
+
+  const [
+    removingAvatar,
+    setRemovingAvatar,
+  ] = useState(false);
+
+  const [
+    gardenVisibility,
+    setGardenVisibility,
+  ] = useState<
+    "private" | "connections"
+  >("private");
 
   useEffect(() => {
     async function loadProfile() {
       try {
         setErrorMessage("");
 
-        const profileData = await getCurrentProfile();
+        const profileData =
+          await getCurrentProfile();
 
         setProfile(profileData);
-        setDisplayName(profileData.display_name);
-        setGardenVisibility(profileData.garden_visibility);
-        setAvatarUrl(getAvatarUrl(profileData.avatar_path));
+
+        setDisplayName(
+          profileData.display_name
+        );
+
+        setGardenVisibility(
+          profileData.garden_visibility
+        );
+
+        setAvatarUrl(
+          getAvatarUrl(
+            profileData.avatar_path
+          )
+        );
       } catch (error) {
         setErrorMessage(
           error instanceof Error
@@ -63,23 +98,36 @@ export default function ProfilePage() {
 
     try {
       const nameUpdatedProfile =
-        await updateDisplayName(displayName);
+        await updateDisplayName(
+          displayName
+        );
 
       const visibilityUpdatedProfile =
-        await updateGardenVisibility(gardenVisibility);
+        await updateGardenVisibility(
+          gardenVisibility
+        );
 
       const finalProfile: Profile = {
         ...nameUpdatedProfile,
         garden_visibility:
           visibilityUpdatedProfile.garden_visibility,
-        updated_at: visibilityUpdatedProfile.updated_at,
+        updated_at:
+          visibilityUpdatedProfile.updated_at,
       };
 
       setProfile(finalProfile);
-      setDisplayName(finalProfile.display_name);
-      setGardenVisibility(finalProfile.garden_visibility);
 
-      setSuccessMessage("Profile updated successfully.");
+      setDisplayName(
+        finalProfile.display_name
+      );
+
+      setGardenVisibility(
+        finalProfile.garden_visibility
+      );
+
+      setSuccessMessage(
+        "Profile updated successfully."
+      );
     } catch (error) {
       setErrorMessage(
         error instanceof Error
@@ -101,20 +149,25 @@ export default function ProfilePage() {
     setSuccessMessage("");
 
     try {
-      await removeAvatar(profile.avatar_path);
+      await removeAvatar(
+        profile.avatar_path
+      );
 
       setAvatarUrl(null);
 
-      setProfile((currentProfile) =>
-        currentProfile
-          ? {
-              ...currentProfile,
-              avatar_path: null,
-            }
-          : currentProfile
+      setProfile(
+        (currentProfile) =>
+          currentProfile
+            ? {
+                ...currentProfile,
+                avatar_path: null,
+              }
+            : currentProfile
       );
 
-      setSuccessMessage("Avatar removed successfully.");
+      setSuccessMessage(
+        "Avatar removed successfully."
+      );
     } catch (error) {
       setErrorMessage(
         error instanceof Error
@@ -129,7 +182,8 @@ export default function ProfilePage() {
   async function handleAvatarChange(
     event: ChangeEvent<HTMLInputElement>
   ) {
-    const file = event.target.files?.[0];
+    const file =
+      event.target.files?.[0];
 
     if (!file) {
       return;
@@ -140,9 +194,11 @@ export default function ProfilePage() {
     setSuccessMessage("");
 
     try {
-      const avatarPath = await uploadAvatar(file);
+      const avatarPath =
+        await uploadAvatar(file);
 
-      const newAvatarUrl = getAvatarUrl(avatarPath);
+      const newAvatarUrl =
+        getAvatarUrl(avatarPath);
 
       setAvatarUrl(
         newAvatarUrl
@@ -150,16 +206,19 @@ export default function ProfilePage() {
           : null
       );
 
-      setProfile((currentProfile) =>
-        currentProfile
-          ? {
-              ...currentProfile,
-              avatar_path: avatarPath,
-            }
-          : currentProfile
+      setProfile(
+        (currentProfile) =>
+          currentProfile
+            ? {
+                ...currentProfile,
+                avatar_path: avatarPath,
+              }
+            : currentProfile
       );
 
-      setSuccessMessage("Avatar updated successfully.");
+      setSuccessMessage(
+        "Avatar updated successfully."
+      );
     } catch (error) {
       setErrorMessage(
         error instanceof Error
@@ -175,7 +234,7 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <section>
-        <p className="text-slate-600">
+        <p className="text-slate-600 dark:text-slate-400">
           Loading profile...
         </p>
       </section>
@@ -185,15 +244,36 @@ export default function ProfilePage() {
   return (
     <section>
       <div>
-        <p className="text-sm font-semibold uppercase tracking-wider text-green-700">
+        <p
+          className="
+            text-sm font-semibold
+            uppercase tracking-wider
+            text-green-700
+
+            dark:text-emerald-300
+          "
+        >
           Account
         </p>
 
-        <h1 className="mt-2 text-3xl font-bold text-slate-900">
+        <h1
+          className="
+            mt-2 text-3xl font-bold
+            text-slate-900
+
+            dark:text-slate-100
+          "
+        >
           Your Profile
         </h1>
 
-        <p className="mt-2 text-slate-600">
+        <p
+          className="
+            mt-2 text-slate-600
+
+            dark:text-slate-400
+          "
+        >
           Manage your Bloom Buddy profile and garden identity.
         </p>
       </div>
@@ -201,7 +281,14 @@ export default function ProfilePage() {
       {errorMessage && (
         <p
           role="alert"
-          className="mt-6 rounded-lg bg-red-50 p-3 text-sm text-red-700"
+          className="
+            mt-6 rounded-lg
+            bg-red-50 p-3
+            text-sm text-red-700
+
+            dark:bg-red-950/40
+            dark:text-red-300
+          "
         >
           {errorMessage}
         </p>
@@ -210,24 +297,60 @@ export default function ProfilePage() {
       {successMessage && (
         <p
           role="status"
-          className="mt-6 rounded-lg bg-green-50 p-3 text-sm text-green-700"
+          className="
+            mt-6 rounded-lg
+            bg-green-50 p-3
+            text-sm text-green-700
+
+            dark:bg-emerald-950/40
+            dark:text-emerald-300
+          "
         >
           {successMessage}
         </p>
       )}
 
       {profile && (
-        <div className="mt-8 max-w-2xl rounded-2xl border border-slate-200 bg-white p-6">
+        <div
+          className="
+            mt-8 max-w-2xl
+            rounded-2xl
+            border border-slate-200
+            bg-white p-6
+            transition-colors duration-200
+
+            dark:border-slate-700
+            dark:bg-slate-900
+          "
+        >
           {/* Avatar */}
           <div className="mb-8">
             {avatarUrl ? (
               <img
                 src={avatarUrl}
                 alt={`${profile.display_name}'s avatar`}
-                className="size-24 rounded-full object-cover"
+                className="
+                  size-24 rounded-full
+                  object-cover
+                  ring-2 ring-slate-100
+
+                  dark:ring-slate-700
+                "
               />
             ) : (
-              <div className="grid size-24 place-items-center rounded-full bg-green-100 text-2xl font-bold text-green-800">
+              <div
+                className="
+                  grid size-24
+                  place-items-center
+                  rounded-full
+                  bg-green-100
+                  text-2xl font-bold
+                  text-green-800
+
+                  dark:bg-emerald-950/50
+                  dark:text-emerald-300
+                "
+              >
                 {profile.display_name
                   .charAt(0)
                   .toUpperCase()}
@@ -237,7 +360,21 @@ export default function ProfilePage() {
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <label
                 htmlFor="avatar"
-                className="inline-block cursor-pointer rounded-lg border border-green-600 px-4 py-2 font-semibold text-green-700 transition hover:bg-green-50"
+                className="
+                  inline-block cursor-pointer
+                  rounded-lg
+                  border border-green-600
+                  px-4 py-2
+                  font-semibold
+                  text-green-700
+                  transition
+
+                  hover:bg-green-50
+
+                  dark:border-emerald-500
+                  dark:text-emerald-300
+                  dark:hover:bg-emerald-950/40
+                "
               >
                 {uploadingAvatar
                   ? "Uploading..."
@@ -251,17 +388,43 @@ export default function ProfilePage() {
                 name="avatar"
                 type="file"
                 accept="image/jpeg,image/png,image/webp"
-                disabled={uploadingAvatar || removingAvatar}
-                onChange={handleAvatarChange}
+                disabled={
+                  uploadingAvatar ||
+                  removingAvatar
+                }
+                onChange={
+                  handleAvatarChange
+                }
                 className="sr-only"
               />
 
               {avatarUrl && (
                 <button
                   type="button"
-                  onClick={handleRemoveAvatar}
-                  disabled={removingAvatar || uploadingAvatar}
-                  className="rounded-lg border border-red-300 px-4 py-2 font-semibold text-red-700 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-60"
+                  onClick={
+                    handleRemoveAvatar
+                  }
+                  disabled={
+                    removingAvatar ||
+                    uploadingAvatar
+                  }
+                  className="
+                    rounded-lg
+                    border border-red-300
+                    px-4 py-2
+                    font-semibold
+                    text-red-700
+                    transition
+
+                    hover:bg-red-50
+
+                    dark:border-red-900/70
+                    dark:text-red-300
+                    dark:hover:bg-red-950/40
+
+                    disabled:cursor-not-allowed
+                    disabled:opacity-60
+                  "
                 >
                   {removingAvatar
                     ? "Removing..."
@@ -270,7 +433,7 @@ export default function ProfilePage() {
               )}
             </div>
 
-            <p className="mt-2 text-sm text-slate-500">
+            <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
               JPEG, PNG, or WebP. Maximum size 2 MB.
             </p>
           </div>
@@ -279,7 +442,12 @@ export default function ProfilePage() {
           <div>
             <label
               htmlFor="displayName"
-              className="block font-medium text-slate-900"
+              className="
+                block font-medium
+                text-slate-900
+
+                dark:text-slate-200
+              "
             >
               Display name
             </label>
@@ -289,9 +457,28 @@ export default function ProfilePage() {
               type="text"
               value={displayName}
               onChange={(event) =>
-                setDisplayName(event.target.value)
+                setDisplayName(
+                  event.target.value
+                )
               }
-              className="mt-2 w-full rounded-lg border border-slate-300 px-4 py-3"
+              className="
+                mt-2 w-full
+                rounded-lg
+                border border-slate-300
+                bg-white px-4 py-3
+                text-slate-900
+                transition-colors duration-200
+
+                focus:border-emerald-500
+                focus:outline-none
+                focus:ring-2
+                focus:ring-emerald-500/20
+
+                dark:border-slate-700
+                dark:bg-slate-800
+                dark:text-slate-100
+                dark:focus:border-emerald-400
+              "
             />
           </div>
 
@@ -299,7 +486,12 @@ export default function ProfilePage() {
           <div className="mt-6">
             <label
               htmlFor="gardenVisibility"
-              className="block font-medium text-slate-900"
+              className="
+                block font-medium
+                text-slate-900
+
+                dark:text-slate-200
+              "
             >
               Garden visibility
             </label>
@@ -314,7 +506,24 @@ export default function ProfilePage() {
                     | "connections"
                 )
               }
-              className="mt-2 w-full rounded-lg border border-slate-300 px-4 py-3"
+              className="
+                mt-2 w-full
+                rounded-lg
+                border border-slate-300
+                bg-white px-4 py-3
+                text-slate-900
+                transition-colors duration-200
+
+                focus:border-emerald-500
+                focus:outline-none
+                focus:ring-2
+                focus:ring-emerald-500/20
+
+                dark:border-slate-700
+                dark:bg-slate-800
+                dark:text-slate-100
+                dark:focus:border-emerald-400
+              "
             >
               <option value="private">
                 Private
@@ -325,7 +534,7 @@ export default function ProfilePage() {
               </option>
             </select>
 
-            <p className="mt-2 text-sm text-slate-500">
+            <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
               Private gardens are visible only to you.
               Connections-only gardens will be visible to approved
               connections when Social Gardens is added.
@@ -336,9 +545,26 @@ export default function ProfilePage() {
             type="button"
             onClick={handleSave}
             disabled={saving}
-            className="mt-8 rounded-lg bg-green-600 px-5 py-3 font-semibold text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-60"
+            className="
+              mt-8 rounded-lg
+              bg-green-600
+              px-5 py-3
+              font-semibold
+              text-white
+              transition
+
+              hover:bg-green-700
+
+              dark:bg-emerald-600
+              dark:hover:bg-emerald-500
+
+              disabled:cursor-not-allowed
+              disabled:opacity-60
+            "
           >
-            {saving ? "Saving..." : "Save Changes"}
+            {saving
+              ? "Saving..."
+              : "Save Changes"}
           </button>
         </div>
       )}

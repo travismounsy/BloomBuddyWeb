@@ -98,10 +98,7 @@ export default function ProgressPage() {
         ]);
 
         setHabits(habitData);
-
-        setSchedules(
-          scheduleData
-        );
+        setSchedules(scheduleData);
 
         setWeeklyCompletions(
           weeklyCompletionData
@@ -133,8 +130,17 @@ export default function ProgressPage() {
           description="Review your streaks, completion rates, and category performance."
         />
 
-        <section className="rounded-[2rem] border border-emerald-950/10 bg-white p-6 shadow-sm">
-          <p className="text-slate-600">
+        <section
+          className="
+            rounded-[2rem]
+            border border-emerald-950/10
+            bg-white p-6 shadow-sm
+
+            dark:border-white/10
+            dark:bg-slate-900
+          "
+        >
+          <p className="text-slate-600 dark:text-slate-400">
             Loading progress...
           </p>
         </section>
@@ -203,7 +209,14 @@ export default function ProgressPage() {
       {errorMessage && (
         <p
           role="alert"
-          className="mb-6 rounded-xl bg-red-50 p-4 text-sm text-red-700"
+          className="
+            mb-6 rounded-xl
+            bg-red-50 p-4
+            text-sm text-red-700
+
+            dark:bg-red-950/40
+            dark:text-red-300
+          "
         >
           {errorMessage}
         </p>
@@ -211,23 +224,42 @@ export default function ProgressPage() {
 
       {/* Primary metrics */}
       <section className="grid gap-5 md:grid-cols-3">
-        <article className="rounded-[2rem] border border-emerald-950/10 bg-white p-6 shadow-sm">
+        <article
+          className="
+            rounded-[2rem]
+            border border-emerald-950/10
+            bg-white p-6 shadow-sm
+
+            dark:border-white/10
+            dark:bg-slate-900
+          "
+        >
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-sm font-medium text-slate-500">
+              <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
                 Today
               </p>
 
-              <p className="mt-3 text-4xl font-bold text-emerald-900">
+              <p className="mt-3 text-4xl font-bold text-emerald-900 dark:text-emerald-200">
                 {todayCompletionRate}%
               </p>
 
-              <p className="mt-2 text-sm text-slate-600">
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                 completion rate
               </p>
             </div>
 
-            <div className="grid size-11 shrink-0 place-items-center rounded-2xl bg-emerald-100 text-emerald-800">
+            <div
+              className="
+                grid size-11 shrink-0 place-items-center
+                rounded-2xl
+                bg-emerald-100
+                text-emerald-800
+
+                dark:bg-emerald-950/50
+                dark:text-emerald-300
+              "
+            >
               <Target
                 size={22}
                 aria-hidden="true"
@@ -235,9 +267,9 @@ export default function ProgressPage() {
             </div>
           </div>
 
-          <div className="mt-5 h-2 overflow-hidden rounded-full bg-slate-100">
+          <div className="mt-5 h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
             <div
-              className="h-full rounded-full bg-emerald-500 transition-all"
+              className="h-full rounded-full bg-emerald-500 transition-all dark:bg-emerald-400"
               style={{
                 width: `${todayCompletionRate}%`,
               }}
@@ -245,23 +277,42 @@ export default function ProgressPage() {
           </div>
         </article>
 
-        <article className="rounded-[2rem] border border-emerald-950/10 bg-white p-6 shadow-sm">
+        <article
+          className="
+            rounded-[2rem]
+            border border-emerald-950/10
+            bg-white p-6 shadow-sm
+
+            dark:border-white/10
+            dark:bg-slate-900
+          "
+        >
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-sm font-medium text-slate-500">
+              <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
                 This Week
               </p>
 
-              <p className="mt-3 text-4xl font-bold text-emerald-900">
+              <p className="mt-3 text-4xl font-bold text-emerald-900 dark:text-emerald-200">
                 {weeklyCompletionRate}%
               </p>
 
-              <p className="mt-2 text-sm text-slate-600">
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                 completion rate
               </p>
             </div>
 
-            <div className="grid size-11 shrink-0 place-items-center rounded-2xl bg-emerald-100 text-emerald-800">
+            <div
+              className="
+                grid size-11 shrink-0 place-items-center
+                rounded-2xl
+                bg-emerald-100
+                text-emerald-800
+
+                dark:bg-emerald-950/50
+                dark:text-emerald-300
+              "
+            >
               <TrendingUp
                 size={22}
                 aria-hidden="true"
@@ -269,9 +320,9 @@ export default function ProgressPage() {
             </div>
           </div>
 
-          <div className="mt-5 h-2 overflow-hidden rounded-full bg-slate-100">
+          <div className="mt-5 h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
             <div
-              className="h-full rounded-full bg-emerald-500 transition-all"
+              className="h-full rounded-full bg-emerald-500 transition-all dark:bg-emerald-400"
               style={{
                 width: `${weeklyCompletionRate}%`,
               }}
@@ -279,25 +330,44 @@ export default function ProgressPage() {
           </div>
         </article>
 
-        <article className="rounded-[2rem] border border-emerald-950/10 bg-white p-6 shadow-sm">
+        <article
+          className="
+            rounded-[2rem]
+            border border-emerald-950/10
+            bg-white p-6 shadow-sm
+
+            dark:border-white/10
+            dark:bg-slate-900
+          "
+        >
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-sm font-medium text-slate-500">
+              <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
                 Current Streak
               </p>
 
-              <p className="mt-3 text-4xl font-bold text-emerald-900">
+              <p className="mt-3 text-4xl font-bold text-emerald-900 dark:text-emerald-200">
                 {currentStreak}
               </p>
 
-              <p className="mt-2 text-sm text-slate-600">
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                 {currentStreak === 1
                   ? "day"
                   : "days"}
               </p>
             </div>
 
-            <div className="grid size-11 shrink-0 place-items-center rounded-2xl bg-orange-100 text-orange-700">
+            <div
+              className="
+                grid size-11 shrink-0 place-items-center
+                rounded-2xl
+                bg-orange-100
+                text-orange-700
+
+                dark:bg-orange-950/40
+                dark:text-orange-300
+              "
+            >
               <Flame
                 size={22}
                 aria-hidden="true"
@@ -309,28 +379,47 @@ export default function ProgressPage() {
 
       {/* Secondary metrics */}
       <section className="mt-6 grid gap-5 md:grid-cols-2">
-        <article className="rounded-[2rem] border border-emerald-950/10 bg-white p-6 shadow-sm">
+        <article
+          className="
+            rounded-[2rem]
+            border border-emerald-950/10
+            bg-white p-6 shadow-sm
+
+            dark:border-white/10
+            dark:bg-slate-900
+          "
+        >
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-sm font-medium text-slate-500">
+              <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
                 Weekly Completions
               </p>
 
-              <p className="mt-3 text-3xl font-bold text-emerald-900">
+              <p className="mt-3 text-3xl font-bold text-emerald-900 dark:text-emerald-200">
                 {weeklySummary.completedCount}
 
-                <span className="text-lg font-medium text-slate-400">
+                <span className="text-lg font-medium text-slate-400 dark:text-slate-500">
                   {" "}
                   / {weeklySummary.scheduledCount}
                 </span>
               </p>
 
-              <p className="mt-2 text-sm text-slate-600">
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                 scheduled habits completed this week
               </p>
             </div>
 
-            <div className="grid size-11 shrink-0 place-items-center rounded-2xl bg-emerald-100 text-emerald-800">
+            <div
+              className="
+                grid size-11 shrink-0 place-items-center
+                rounded-2xl
+                bg-emerald-100
+                text-emerald-800
+
+                dark:bg-emerald-950/50
+                dark:text-emerald-300
+              "
+            >
               <CalendarCheck2
                 size={22}
                 aria-hidden="true"
@@ -339,31 +428,50 @@ export default function ProgressPage() {
           </div>
         </article>
 
-        <article className="rounded-[2rem] border border-emerald-950/10 bg-white p-6 shadow-sm">
+        <article
+          className="
+            rounded-[2rem]
+            border border-emerald-950/10
+            bg-white p-6 shadow-sm
+
+            dark:border-white/10
+            dark:bg-slate-900
+          "
+        >
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-sm font-medium text-slate-500">
+              <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
                 Best Day
               </p>
 
               {weeklySummary.bestDayLabel ? (
                 <>
-                  <p className="mt-3 text-3xl font-bold text-emerald-900">
+                  <p className="mt-3 text-3xl font-bold text-emerald-900 dark:text-emerald-200">
                     {weeklySummary.bestDayLabel}
                   </p>
 
-                  <p className="mt-2 text-sm text-slate-600">
+                  <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                     {weeklySummary.bestDayRate}% completion
                   </p>
                 </>
               ) : (
-                <p className="mt-3 text-slate-600">
+                <p className="mt-3 text-slate-600 dark:text-slate-400">
                   No scheduled habits this week.
                 </p>
               )}
             </div>
 
-            <div className="grid size-11 shrink-0 place-items-center rounded-2xl bg-lime-100 text-lime-800">
+            <div
+              className="
+                grid size-11 shrink-0 place-items-center
+                rounded-2xl
+                bg-lime-100
+                text-lime-800
+
+                dark:bg-lime-950/40
+                dark:text-lime-300
+              "
+            >
               <Award
                 size={22}
                 aria-hidden="true"
@@ -374,13 +482,22 @@ export default function ProgressPage() {
       </section>
 
       {/* Weekly chart */}
-      <section className="mt-6 rounded-[2rem] border border-emerald-950/10 bg-white p-6 shadow-sm">
+      <section
+        className="
+          mt-6 rounded-[2rem]
+          border border-emerald-950/10
+          bg-white p-6 shadow-sm
+
+          dark:border-white/10
+          dark:bg-slate-900
+        "
+      >
         <div>
-          <p className="text-sm font-medium text-slate-500">
+          <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
             Weekly Progress
           </p>
 
-          <h2 className="mt-1 text-xl font-semibold text-slate-900">
+          <h2 className="mt-1 text-xl font-semibold text-slate-900 dark:text-slate-100">
             Completion by Day
           </h2>
         </div>
@@ -391,9 +508,19 @@ export default function ProgressPage() {
               key={day.date}
               className="flex min-w-0 flex-col items-center"
             >
-              <div className="flex h-44 w-full items-end justify-center rounded-xl bg-slate-50 px-2 py-3">
+              <div
+                className="
+                  flex h-44 w-full
+                  items-end justify-center
+                  rounded-xl
+                  bg-slate-50
+                  px-2 py-3
+
+                  dark:bg-slate-800/70
+                "
+              >
                 <div
-                  className="w-full max-w-10 rounded-t-lg bg-emerald-500 transition-all"
+                  className="w-full max-w-10 rounded-t-lg bg-emerald-500 transition-all dark:bg-emerald-400"
                   style={{
                     height: `${Math.max(
                       day.completionRate,
@@ -404,11 +531,11 @@ export default function ProgressPage() {
                 />
               </div>
 
-              <p className="mt-3 text-sm font-medium text-slate-700">
+              <p className="mt-3 text-sm font-medium text-slate-700 dark:text-slate-300">
                 {day.label}
               </p>
 
-              <p className="mt-1 text-xs text-slate-500">
+              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                 {day.completionRate}%
               </p>
             </div>
@@ -417,24 +544,43 @@ export default function ProgressPage() {
       </section>
 
       {/* Category performance */}
-      <section className="mt-6 rounded-[2rem] border border-emerald-950/10 bg-white p-6 shadow-sm">
+      <section
+        className="
+          mt-6 rounded-[2rem]
+          border border-emerald-950/10
+          bg-white p-6 shadow-sm
+
+          dark:border-white/10
+          dark:bg-slate-900
+        "
+      >
         <div>
-          <p className="text-sm font-medium text-slate-500">
+          <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
             Categories
           </p>
 
-          <h2 className="mt-1 text-xl font-semibold text-slate-900">
+          <h2 className="mt-1 text-xl font-semibold text-slate-900 dark:text-slate-100">
             Category Performance
           </h2>
 
-          <p className="mt-2 text-sm text-slate-600">
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
             See how consistently you completed habits in each category this week.
           </p>
         </div>
 
         {categoryProgress.length === 0 ? (
-          <div className="mt-6 rounded-xl border border-dashed border-slate-300 p-6 text-center">
-            <p className="text-slate-600">
+          <div
+            className="
+              mt-6 rounded-xl
+              border border-dashed
+              border-slate-300
+              p-6 text-center
+
+              dark:border-slate-700
+              dark:bg-slate-950/30
+            "
+          >
+            <p className="text-slate-600 dark:text-slate-400">
               No category progress available for this week.
             </p>
           </div>
@@ -447,11 +593,11 @@ export default function ProgressPage() {
                 >
                   <div className="flex items-center justify-between gap-4">
                     <div>
-                      <p className="font-medium text-slate-900">
+                      <p className="font-medium text-slate-900 dark:text-slate-100">
                         {category.category}
                       </p>
 
-                      <p className="mt-1 text-xs text-slate-500">
+                      <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                         {category.completedCount}
                         {" / "}
                         {category.scheduledCount}
@@ -459,14 +605,14 @@ export default function ProgressPage() {
                       </p>
                     </div>
 
-                    <span className="text-sm font-semibold text-emerald-800">
+                    <span className="text-sm font-semibold text-emerald-800 dark:text-emerald-300">
                       {category.completionRate}%
                     </span>
                   </div>
 
-                  <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-100">
+                  <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
                     <div
-                      className="h-full rounded-full bg-emerald-500 transition-all"
+                      className="h-full rounded-full bg-emerald-500 transition-all dark:bg-emerald-400"
                       style={{
                         width: `${category.completionRate}%`,
                       }}

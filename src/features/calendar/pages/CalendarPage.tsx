@@ -63,7 +63,8 @@ function getMonthRange(date: Date) {
 }
 
 export default function CalendarPage() {
-  const [habits, setHabits] = useState<Habit[]>([]);
+  const [habits, setHabits] =
+    useState<Habit[]>([]);
 
   const [schedules, setSchedules] =
     useState<HabitSchedule[]>([]);
@@ -78,14 +79,14 @@ export default function CalendarPage() {
     setMonthCompletions,
   ] = useState<HabitCompletion[]>([]);
 
-  const [currentMonth, setCurrentMonth] = useState(
-    () => new Date()
-  );
+  const [currentMonth, setCurrentMonth] =
+    useState(() => new Date());
 
   const [selectedDate, setSelectedDate] =
     useState<Date | null>(null);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] =
+    useState(true);
 
   const [
     loadingSelectedDate,
@@ -95,7 +96,6 @@ export default function CalendarPage() {
   const [errorMessage, setErrorMessage] =
     useState("");
 
-  // Load habits and schedules
   useEffect(() => {
     async function loadCalendarData() {
       try {
@@ -125,14 +125,15 @@ export default function CalendarPage() {
     void loadCalendarData();
   }, []);
 
-  // Load completion data for the visible month
   useEffect(() => {
     async function loadMonthCompletions() {
       try {
         const {
           startDate,
           endDate,
-        } = getMonthRange(currentMonth);
+        } = getMonthRange(
+          currentMonth
+        );
 
         const completionData =
           await getCompletionsForRange(
@@ -247,7 +248,9 @@ export default function CalendarPage() {
     }
 
     const selectedDateKey =
-      getLocalDateKey(selectedDate);
+      getLocalDateKey(
+        selectedDate
+      );
 
     function updateCompletionList(
       currentCompletions: HabitCompletion[]
@@ -291,7 +294,7 @@ export default function CalendarPage() {
   if (loading) {
     return (
       <section>
-        <p className="text-slate-600">
+        <p className="text-slate-600 dark:text-slate-400">
           Loading calendar...
         </p>
       </section>
@@ -301,15 +304,33 @@ export default function CalendarPage() {
   return (
     <section>
       <div>
-        <p className="text-sm font-semibold uppercase tracking-wider text-green-700">
+        <p
+          className="
+            text-sm font-semibold
+            uppercase tracking-wider
+            text-green-700
+            dark:text-emerald-300
+          "
+        >
           Calendar
         </p>
 
-        <h1 className="mt-2 text-3xl font-bold text-slate-900">
+        <h1
+          className="
+            mt-2 text-3xl font-bold
+            text-slate-900
+            dark:text-slate-100
+          "
+        >
           Monthly Schedule
         </h1>
 
-        <p className="mt-2 text-slate-600">
+        <p
+          className="
+            mt-2 text-slate-600
+            dark:text-slate-400
+          "
+        >
           See which habits are scheduled throughout the month.
         </p>
       </div>
@@ -317,15 +338,37 @@ export default function CalendarPage() {
       {errorMessage && (
         <p
           role="alert"
-          className="mt-6 rounded-lg bg-red-50 p-3 text-sm text-red-700"
+          className="
+            mt-6 rounded-lg
+            bg-red-50 p-3
+            text-sm text-red-700
+
+            dark:bg-red-950/40
+            dark:text-red-300
+          "
         >
           {errorMessage}
         </p>
       )}
 
-      <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-6">
+      <div
+        className="
+          mt-8 rounded-2xl
+          border border-slate-200
+          bg-white p-6
+
+          dark:border-slate-700
+          dark:bg-slate-900
+        "
+      >
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <h2 className="text-2xl font-semibold text-slate-900">
+          <h2
+            className="
+              text-2xl font-semibold
+              text-slate-900
+              dark:text-slate-100
+            "
+          >
             {monthLabel}
           </h2>
 
@@ -333,7 +376,21 @@ export default function CalendarPage() {
             <button
               type="button"
               onClick={goToPreviousMonth}
-              className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+              className="
+                rounded-lg
+                border border-slate-300
+                px-4 py-2
+                text-sm font-medium
+                text-slate-700
+                transition
+
+                hover:bg-slate-50
+
+                dark:border-slate-700
+                dark:text-slate-300
+                dark:hover:bg-slate-800
+                dark:hover:text-white
+              "
             >
               Previous
             </button>
@@ -341,7 +398,20 @@ export default function CalendarPage() {
             <button
               type="button"
               onClick={goToToday}
-              className="rounded-lg border border-green-600 px-4 py-2 text-sm font-medium text-green-700 hover:bg-green-50"
+              className="
+                rounded-lg
+                border border-green-600
+                px-4 py-2
+                text-sm font-medium
+                text-green-700
+                transition
+
+                hover:bg-green-50
+
+                dark:border-emerald-500
+                dark:text-emerald-300
+                dark:hover:bg-emerald-950/40
+              "
             >
               Today
             </button>
@@ -349,7 +419,21 @@ export default function CalendarPage() {
             <button
               type="button"
               onClick={goToNextMonth}
-              className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+              className="
+                rounded-lg
+                border border-slate-300
+                px-4 py-2
+                text-sm font-medium
+                text-slate-700
+                transition
+
+                hover:bg-slate-50
+
+                dark:border-slate-700
+                dark:text-slate-300
+                dark:hover:bg-slate-800
+                dark:hover:text-white
+              "
             >
               Next
             </button>
@@ -365,14 +449,27 @@ export default function CalendarPage() {
         />
 
         {selectedDate && (
-          <div className="mt-8 border-t border-slate-200 pt-6">
+          <div
+            className="
+              mt-8 border-t
+              border-slate-200 pt-6
+
+              dark:border-slate-700
+            "
+          >
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
-                <p className="text-sm font-medium text-green-700">
+                <p className="text-sm font-medium text-green-700 dark:text-emerald-300">
                   Selected Date
                 </p>
 
-                <h3 className="mt-1 text-xl font-semibold text-slate-900">
+                <h3
+                  className="
+                    mt-1 text-xl font-semibold
+                    text-slate-900
+                    dark:text-slate-100
+                  "
+                >
                   {selectedDate.toLocaleDateString(
                     undefined,
                     {
@@ -391,19 +488,42 @@ export default function CalendarPage() {
                   setSelectedDate(null);
                   setSelectedDateCompletions([]);
                 }}
-                className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-600 hover:bg-slate-50"
+                className="
+                  rounded-lg
+                  border border-slate-300
+                  px-3 py-2
+                  text-sm text-slate-600
+                  transition
+
+                  hover:bg-slate-50
+
+                  dark:border-slate-700
+                  dark:text-slate-300
+                  dark:hover:bg-slate-800
+                  dark:hover:text-white
+                "
               >
                 Close
               </button>
             </div>
 
             {loadingSelectedDate ? (
-              <p className="mt-5 text-slate-600">
+              <p className="mt-5 text-slate-600 dark:text-slate-400">
                 Loading habits...
               </p>
             ) : selectedHabits.length === 0 ? (
-              <div className="mt-5 rounded-xl border border-dashed border-slate-300 p-6 text-center">
-                <p className="text-slate-600">
+              <div
+                className="
+                  mt-5 rounded-xl
+                  border border-dashed
+                  border-slate-300
+                  p-6 text-center
+
+                  dark:border-slate-700
+                  dark:bg-slate-950/30
+                "
+              >
+                <p className="text-slate-600 dark:text-slate-400">
                   No habits scheduled for this date.
                 </p>
               </div>
@@ -422,7 +542,9 @@ export default function CalendarPage() {
                       <HabitCard
                         key={habit.id}
                         habit={habit}
-                        completion={completion}
+                        completion={
+                          completion
+                        }
                         date={getLocalDateKey(
                           selectedDate
                         )}

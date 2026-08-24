@@ -190,8 +190,17 @@ export default function HomePage() {
           description="Complete today's habits and help your plant grow."
         />
 
-        <section className="rounded-[2rem] border border-emerald-950/10 bg-white p-6 shadow-sm">
-          <p className="text-slate-600">
+        <section
+          className="
+            rounded-[2rem]
+            border border-emerald-950/10
+            bg-white p-6 shadow-sm
+
+            dark:border-white/10
+            dark:bg-slate-900
+          "
+        >
+          <p className="text-slate-600 dark:text-slate-400">
             Loading your garden...
           </p>
         </section>
@@ -210,7 +219,14 @@ export default function HomePage() {
       {errorMessage && (
         <p
           role="alert"
-          className="mb-6 rounded-xl bg-red-50 p-4 text-sm text-red-700"
+          className="
+            mb-6 rounded-xl
+            bg-red-50 p-4
+            text-sm text-red-700
+
+            dark:bg-red-950/40
+            dark:text-red-300
+          "
         >
           {errorMessage}
         </p>
@@ -226,21 +242,30 @@ export default function HomePage() {
           }
         />
 
-        <article className="rounded-[2rem] border border-emerald-950/10 bg-white p-6 shadow-sm">
-          <p className="text-sm font-medium text-slate-500">
+        <article
+          className="
+            rounded-[2rem]
+            border border-emerald-950/10
+            bg-white p-6 shadow-sm
+
+            dark:border-white/10
+            dark:bg-slate-900
+          "
+        >
+          <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
             Today
           </p>
 
-          <h2 className="mt-1 text-xl font-semibold text-slate-900">
+          <h2 className="mt-1 text-xl font-semibold text-slate-900 dark:text-slate-100">
             Daily Progress
           </h2>
 
-          <p className="mt-5 text-4xl font-bold text-emerald-900">
+          <p className="mt-5 text-4xl font-bold text-emerald-900 dark:text-emerald-200">
             {
               gardenProgress.completedCount
             }
 
-            <span className="text-lg font-medium text-slate-400">
+            <span className="text-lg font-medium text-slate-400 dark:text-slate-500">
               {" "}
               /{" "}
               {
@@ -249,11 +274,11 @@ export default function HomePage() {
             </span>
           </p>
 
-          <p className="mt-2 text-sm text-slate-600">
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
             habits completed today
           </p>
 
-          <div className="mt-6 h-2 overflow-hidden rounded-full bg-slate-100">
+          <div className="mt-6 h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
             <div
               className="h-full rounded-full bg-emerald-500 transition-all duration-500"
               style={{
@@ -262,8 +287,8 @@ export default function HomePage() {
             />
           </div>
 
-          <div className="mt-6 rounded-2xl bg-emerald-50 p-4">
-            <p className="text-sm font-medium text-emerald-900">
+          <div className="mt-6 rounded-2xl bg-emerald-50 p-4 dark:bg-emerald-950/30">
+            <p className="text-sm font-medium text-emerald-900 dark:text-emerald-200">
               {gardenProgress.scheduledCount === 0
                 ? "You have no habits scheduled today."
                 : gardenProgress.completedCount ===
@@ -279,19 +304,28 @@ export default function HomePage() {
         </article>
       </section>
 
-      <section className="mt-6 rounded-[2rem] border border-emerald-950/10 bg-white p-6 shadow-sm">
+      <section
+        className="
+          mt-6 rounded-[2rem]
+          border border-emerald-950/10
+          bg-white p-6 shadow-sm
+
+          dark:border-white/10
+          dark:bg-slate-900
+        "
+      >
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <p className="text-sm font-medium text-slate-500">
+            <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
               Today's Routine
             </p>
 
-            <h2 className="mt-1 text-xl font-semibold text-slate-900">
+            <h2 className="mt-1 text-xl font-semibold text-slate-900 dark:text-slate-100">
               Habits for Today
             </h2>
           </div>
 
-          <span className="text-sm text-slate-500">
+          <span className="text-sm text-slate-500 dark:text-slate-400">
             {habitsDueToday.length}{" "}
             {habitsDueToday.length === 1
               ? "habit"
@@ -300,12 +334,21 @@ export default function HomePage() {
         </div>
 
         {habitsDueToday.length === 0 ? (
-          <div className="mt-6 rounded-xl border border-dashed border-slate-300 p-8 text-center">
-            <p className="font-medium text-slate-700">
+          <div
+            className="
+              mt-6 rounded-xl
+              border border-dashed border-slate-300
+              p-8 text-center
+
+              dark:border-slate-700
+              dark:bg-slate-950/30
+            "
+          >
+            <p className="font-medium text-slate-700 dark:text-slate-200">
               Nothing scheduled today.
             </p>
 
-            <p className="mt-2 text-sm text-slate-500">
+            <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
               Enjoy the break or add a new habit from the Habits page.
             </p>
           </div>
