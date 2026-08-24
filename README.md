@@ -154,3 +154,30 @@ src/
 │
 ├── main.tsx
 └── index.css
+
+🌿 Habit Scheduling
+
+Bloom Buddy supports multiple scheduling strategies.
+
+Daily
+
+The habit is scheduled every day within its active date range.
+
+Weekly
+
+Users select specific weekdays on which the habit should occur.
+
+Example:
+
+Monday
+Wednesday
+Friday
+
+Monthly
+
+Users select a specific day of the month.
+
+Example:
+15th of every month
+
+Scheduling logic determines which habits should appear on the Home, Habits, and Calendar pages for any selected date.
