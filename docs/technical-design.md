@@ -151,3 +151,174 @@ Examples include:
 Separating services from components reduces direct backend dependencies inside the UI.
 
 # 5. Routing Architecture
+Bloom Buddy uses React Router.
+
+The application contains three primary routing areas:
+
+Public Routes
+
+Public pages are accessible without authentication.
+
+Example:
+/
+Authentication Routes
+
+Authentication pages are available to unauthenticated users.
+
+Examples:
+```bash
+/login
+/register
+/forgot-password
+```
+
+A PublicOnlyRoute prevents authenticated users from unnecessarily returning to authentication screens.
+
+Protected Routes
+
+Authenticated application features are located beneath:
+```bash
+/app
+```
+Current protected routes include:
+```bash
+/app
+/app/habits
+/app/calendar
+/app/progress
+/app/profile
+/app/settings
+```
+ProtectedRoute verifies authentication before allowing access to these routes.
+
+AppLayout provides the common authenticated application shell, including navigation, header content, and the routed page outlet.
+
+# 6. Habit Management System
+Habits are the central domain object within Bloom Buddy.
+
+A habit contains information such as:
+
+- Title
+- Description
+- Category
+- Color
+- Start date
+- Optional end date
+
+Habit creation is handled through HabitForm.
+
+The form creates the habit first and then creates its associated schedule.
+
+Conceptually:
+```bash
+HabitForm
+    │
+    ▼
+createHabit()
+    │
+    ▼
+Habit Record
+    │
+    ▼
+createHabitSchedules()
+    │
+    ▼
+Schedule Record(s)
+```
+If schedule creation fails after the habit has been created, the application attempts to remove the newly created habit. This prevents an incomplete habit without the intended schedule from remaining in the system.
+
+# 7. Habit Scheduling System
+
+Habit scheduling is separated from the habit itself.
+
+Bloom Buddy currently supports three schedule types:
+
+Daily
+
+The habit occurs every day while it is active.
+
+Weekly
+
+The user selects specific weekdays.
+
+Example:
+```bash
+Monday
+Wednesday
+Friday
+```
+Monthly
+
+The user selects a day of the month.
+
+Example:
+```bash
+Day 15
+```
+SchedulePicker collects the scheduling configuration.
+
+habitScheduleService handles schedule persistence and determines which habits apply to a particular date.
+
+A central operation is:
+```bash
+filterHabitsForDate()
+```
+This allows the same scheduling logic to be reused by multiple features.
+```text
+                   Habit Data
+                       │
+                       ▼
+Date ───────► filterHabitsForDate() ◄──── Schedule Data
+                       │
+                       ▼
+               Habits Due on Date
+                       │
+          ┌────────────┼────────────┐
+          ▼            ▼            ▼
+        Home        Habits       Calendar
+```
+This prevents each page from implementing its own interpretation of habit schedules.
+
+# 8. Habit Completion System
+Habit completions are stored independently from habits.
+
+A completion associates a habit with a completion date.
+
+Conceptually:
+```text
+Habit
+  │
+  ├──── Completion — 2026-08-22
+  ├──── Completion — 2026-08-23
+  └──── Completion — 2026-08-24
+```
+HabitCard provides the primary completion control.
+
+When the user marks a habit complete:
+```text
+User
+ │
+ ▼
+HabitCard
+ │
+ ▼
+markHabitComplete()
+ │
+ ▼
+Supabase
+ │
+ ▼
+Completion returned
+ │
+ ▼
+Parent page state updated
+ │
+ ▼
+UI updates immediately
+```
+
+When a completed habit is unchecked, unmarkHabitComplete() removes the corresponding completion.
+
+The parent page receives the result through onCompletionChange.
+
+This enables features such as the Home garden and Calendar completion indicators to update without requiring a complete page reload.
