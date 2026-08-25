@@ -154,3 +154,213 @@ src/
 │
 ├── main.tsx
 └── index.css
+```
+### 🔄 Application Flow
+
+```text
+
+Authentication
+      │
+      ▼
+   Home
+      │
+      ├── Today's Habits
+      │        │
+      │        ▼
+      │   Habit Completion
+      │        │
+      │        ▼
+      │   Plant Growth
+      │
+      ├── Habits
+      │     └── Create / Schedule / Delete
+      │
+      ├── Calendar
+      │     └── Daily & Monthly Activity
+      │
+      ├── Progress
+      │     └── Analytics & Streaks
+      │
+      ├── Profile
+      │     └── Avatar & Garden Identity
+      │
+      └── Settings
+            └── Theme & Preferences
+```
+
+### 🌿 Habit Scheduling
+
+Bloom Buddy supports multiple scheduling strategies.
+
+Daily
+
+The habit is scheduled every day within its active date range.
+
+Weekly
+
+Users select specific weekdays on which the habit should occur.
+
+Example:
+```text
+ Monday
+Wednesday
+Friday
+```
+Monthly
+
+Users select a specific day of the month.
+
+Example:
+```text
+15th of every month
+```
+Scheduling logic determines which habits should appear on the Home, Habits, and Calendar pages for any selected date.
+
+### 🌱 Plant Growth System
+Bloom Buddy converts daily habit completion into visual plant growth.
+
+The application calculates:
+```text
+Completed Habits
+      ÷
+Scheduled Habits
+      │
+      ▼
+Completion Percentage
+      │
+      ▼
+Plant Growth Stage
+```
+As completion increases, the user's plant advances through its growth stages.
+
+The plant updates immediately when habit completion changes.
+
+### 📊 Progress Tracking
+Progress analytics are calculated using habit schedules and completion records.
+
+Bloom Buddy evaluates:
+```text
+Habit Schedule
+      +
+Completion History
+      │
+      ▼
+Daily Progress
+Weekly Progress
+Current Streak
+Category Performance
+Best Day
+```
+This allows analytics to reflect when a habit was actually scheduled rather than treating every habit as a daily requirement.
+
+### 🎨 Responsive Design
+
+Bloom Buddy is designed for desktop and mobile use.
+
+The application includes:
+
+- Responsive layouts
+- Desktop sidebar navigation
+- Mobile bottom navigation
+- Light and dark themes
+- Accessible form labels
+- Loading and error states
+- Immediate UI updates after habit completion
+
+---
+
+### 🚀 Getting Started
+# Prerequisites
+Make sure the following are installed:
+- Node.js
+- npm
+- Git
+
+## Clone the Repository
+```text
+git clone <repository-url>
+cd <repository-folder>
+```
+
+## Install Dependencies
+```text
+npm install
+```
+
+## Environment Variables
+
+Create a .env file in the project root.
+
+```text
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+Do not commit your .env file to source control.
+## Start the Development Server
+```text
+npm run dev
+```
+Vite will provide the local development address in the terminal.
+
+---
+
+### 🧪 Testing
+Bloom Buddy is tested across its primary user workflows, including:
+
+- Registration and login
+- Protected routes
+- Habit creation
+- Habit scheduling
+- Habit deletion
+- Habit completion
+- Plant growth
+- Calendar navigation
+- Calendar completion tracking
+- Progress analytics
+- Avatar management
+- Profile updates
+- Theme switching
+- Preference persistence
+- Responsive navigation
+
+A more detailed QA and testing document will be maintained separately as the project grows.
+
+### 🗺️ Roadmap
+## Completed
+
+- Authentication
+- Protected routes
+- Habit management
+- Habit scheduling
+- Habit completion tracking
+- Dynamic plant growth
+- Calendar
+- Progress analytics
+- User profiles
+- Avatar storage
+- Garden privacy preferences
+- Light / dark / system themes
+- Persistent user preferences
+- Responsive application navigation
+
+## Planned
+
+- Habit editing
+- Expanded progress analytics
+- Social Gardens
+- User connections
+- Shared garden visibility
+- Additional plant customization
+- Improved achievements and milestones
+- Automated testing
+- Accessibility improvements
+
+### 💡 Project Background
+Bloom Buddy originally began as an Android habit-tracking application.
+
+The web version expands the original concept into a full-stack application while preserving its core idea: turning consistent habit completion into visible plant growth.
+
+Rebuilding the application for the web also provided an opportunity to redesign its architecture around reusable React components, TypeScript, persistent cloud data, authentication, responsive layouts, and service-based application logic.
+
+### License
+This project is currently intended for educational and portfolio purposes.
