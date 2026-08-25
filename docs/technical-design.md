@@ -316,7 +316,59 @@ Parent page state updated
  ▼
 UI updates immediately
 ```
+# 9. Garden Growth System
+The virtual plant is Bloom Buddy's primary visual feedback mechanism.
 
+The Home page gathers:
+
+Habits
+Habit schedules
+Today's completions
+
+These values are passed to the garden calculation service.
+```text
+Habits
+   +
+Schedules
+   +
+Today's Completions
+   │
+   ▼
+getDailyGardenProgress()
+   │
+   ├── Scheduled Count
+   ├── Completed Count
+   ├── Completion Rate
+   └── Growth Stage
+             │
+             ▼
+         BloomPlant
+```
+The plant currently supports six visual stages:
+```text
+Empty
+  ↓
+Sprout
+  ↓
+Small
+  ↓
+Growing
+  ↓
+Blooming
+  ↓
+Full
+```
+
+BloomPlant maps the calculated growth stage to the appropriate plant image.
+
+When the growth stage changes, the component transitions between plant images to provide immediate visual feedback.
+
+This design separates growth calculation from plant presentation:
+```text
+gardenService = determines growth
+
+BloomPlant = displays growth
+```
 When a completed habit is unchecked, unmarkHabitComplete() removes the corresponding completion.
 
 The parent page receives the result through onCompletionChange.
