@@ -270,13 +270,13 @@ The application includes:
 ---
 
 ### 🚀 Getting Started
-# Prerequisites
+Prerequisites
 Make sure the following are installed:
 - Node.js
 - npm
 - Git
 
-## Clone the Repository
+### Clone the Repository
 ```text
 git clone <repository-url>
 cd <repository-folder>
