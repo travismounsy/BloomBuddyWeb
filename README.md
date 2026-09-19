@@ -6,6 +6,8 @@ Bloom Buddy is a full-stack habit tracking web application designed to make buil
 
 The project began as an Android mobile application and is being rebuilt as a modern web application with React, TypeScript, Tailwind CSS, and Supabase.
 
+<img width="1267" height="618" alt="Screenshot 2026-08-27 203155" src="https://github.com/user-attachments/assets/05c9d75f-ee48-4a10-8fbc-b015131a6498" />
+
 ---
 
 ## ✨ Features
